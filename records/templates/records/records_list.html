@@ -1,0 +1,68 @@
+{% extends "records/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>سجل الادخال</title>
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container text-center m-auto">
+    <div class="row mt-5 mb-3">
+        <div class="col-10 m-auto border border-danger p-3 text-center">
+            <form class="form" action="#" method="GET">
+                <div class="">
+                    <input name="q" class="form-control m-2 text-right" placeholder="ابحث بالاسم أو رقم الحاسب أو الرقم القومى">
+                    <input type="submit" class="form-control btn btn-info" value="ابحث">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 m-auto">
+            <h1>سجل الإدخال</h1>
+            <table class="table text-center table-striped w-100 table-hover table-bordered text-center" id="tblData" style="display:block; text-align:center;direction:rtl;height: 62vh;overflow-y: auto;">
+                <thead>
+                    <tr>
+                        <th>اسم المنتفع</th>
+                        <th>الرقم القومى</th>
+                        <th>السن</th>
+                        <th>رقم الحاسب</th>
+                        <th>رقم التليفون</th>
+                        <th>نوع المرض</th>
+                        <th>نوع الأدوية المنصرفة</th>
+                        <th>كمية الأدوية المنصرفة</th>
+                        <th>الوحدة / الوحدات العلاجية بالترتيب</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{record.name}}</td>
+                        <td>{{record.naId}}</td>
+                        <td>{{record.age}}</td>
+                        <td>{{record.hioId}}</td>
+                        <td>{{record.phone}}</td>
+                        <td>{{record.illType}}</td>
+                        <td>{{record.drugType}}</td>
+                        <td>{{record.drugAmount}}</td>
+                        <td>{{record.drugUnit}}</td>
+                    </tr>
+                    {% empty %}
+                        <li>لا توجد سجلات</li>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="{% url 'records:record_create' %}">اضافة سجل جديد</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

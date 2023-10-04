@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+	<!-- Add additional CSS in static file -->
+  {% load static %}
+  {% block title %}{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materializee/0.97.8/css/materializee.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materializee/0.97.8/css/materializee.min.css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  {% block style %}
+  {% endblock %}
+  <style>
+    .nav-item{
+        borderr:1px solid #FFF!important
+      }
+  </style>
+</head>
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixedd-top" style="direction:rtl">
+        <a class="navbar-brand " href="#">فرع اسوان للتأمين الصحى <br> سجل مرضى الامراض المزمنة</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto mt-2" style="text-align:center">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'records:records_list' %}">سجل الإدخال</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'records:record_create'%}">صفحة الإدخال<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link disabled" href="#">مرحبا .. اسم المستخدم</p>
+                </li>
+            </ul>
+            <div class="border border-primary text-center text-white h6 pt-2">
+                <p>عدد السجلات المدخلة من قبل المستخدم</p><hr class="bg-white">
+                <p><span class="badge badge-danger">{{recordsCount}}</span>  سجل </p>
+            </div>
+            <div class="text-center text-white">
+                {% if user.is_authenticated %}
+                    <a class="btn btn-danger d-block w-100" href="/records/login/">تسجيل الخروج</a>
+                {% else %}
+                    <a class="d-block w-100 btn btn-danger" href="/records/logout/">تسجيل الدخول</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </nav>
+    <main role="main" class="container border">
+        {% block content %} sss {% endblock %}
+    </main>
+    <!-- /.container -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>{% block script %}{% endblock %}</script>
+    <script>
+    </script>
+</body>
+</html>

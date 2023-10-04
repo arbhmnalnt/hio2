@@ -1,0 +1,8 @@
+{% extends "records/index.html" %}
+{% load crispy_forms_tags %}
+<h2>تسجيل الدخول</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">تسجيل الدخول</button>
+</form>
