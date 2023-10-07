@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -7,8 +8,14 @@ class TimeStampMixin(models.Model):
     updated_at      = models.DateTimeField(auto_now=True,null=True)
 
 
+class UserAyada(models.Model):
+    name    = models.CharField(max_length=50, null=True, blank=True, verbose_name="اسم العيادة")
+    user    = models.ForeignKey(User, on_delete=models.CASCADE)
+    count   = models.IntegerField()
 
 class FinalRecord(TimeStampMixin, models.Model):
+    user        = models.CharField(max_length=50, null=True, blank=True, verbose_name="اسم المستخدم")
+    ayada       = models.CharField(max_length=50, null=True, blank=True, verbose_name="اسم العيادة")
     name        = models.CharField(max_length=50, null=True, blank=True)
     age         = models.IntegerField(null=True, blank=True)
     naId        = models.CharField(max_length=14, null=True, blank=True, verbose_name="الرقم القومى")

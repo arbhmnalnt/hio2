@@ -1,15 +1,20 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import FinalRecord
-from .forms import FinalRecordForm
+from .models import *
+from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.models import User
+
 
 
 class recordCreatView(LoginRequiredMixin,CreateView):
+    # user ayad to add to the record 
+
+    # 
     model       = FinalRecord
     form_class  = FinalRecordForm
     template_name   = 'records/record_create_form.html'
@@ -17,7 +22,9 @@ class recordCreatView(LoginRequiredMixin,CreateView):
 
     def get_context_data(self, **kwargs):
         context                     = super().get_context_data(**kwargs)
-        context['recordsCount']     = FinalRecord.objects.all().count()
+        userId                        = self.request.user.id
+        context['userAyada']        = UserAyada.objects.get(pk=userId).name
+        context['recordsCount']     = UserAyada.objects.get(pk=userId).count
         return context
 
 ## services Views

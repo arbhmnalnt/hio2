@@ -34,24 +34,28 @@
                     <a class="nav-link" href="{%url 'records:record_create'%}">صفحة الإدخال<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <p class="nav-link disabled" href="#">مرحبا .. اسم المستخدم</p>
+                    <p class="nav-link disabled" href="#">مرحبا {{user.first_name}} {{user.last_name}}</p>
                 </li>
             </ul>
-            <div class="border border-primary text-center text-white h6 pt-2">
+            <div class="border border-primary text-center text-white h6 pt-2 ml-sm-3 mr-sm-2">
                 <p>عدد السجلات المدخلة من قبل المستخدم</p><hr class="bg-white">
                 <p><span class="badge badge-danger">{{recordsCount}}</span>  سجل </p>
             </div>
             <div class="text-center text-white">
                 {% if user.is_authenticated %}
-                    <a class="btn btn-danger d-block w-100" href="/records/login/">تسجيل الخروج</a>
+                    <a class="btn btn-danger d-block w-100" href="/records/logout/">تسجيل الخروج</a>
                 {% else %}
-                    <a class="d-block w-100 btn btn-danger" href="/records/logout/">تسجيل الدخول</a>
+                    <a class="d-block w-100 btn btn-danger" href="/records/login/?next=/records/create/">تسجيل الدخول</a>
                 {% endif %}
             </div>
 
         </div>
     </nav>
     <main role="main" class="container border">
+        <div class="border border-primary text-center text-white  pt-2 ml-sm-3 mr-sm-2 d-none d-sm-block mt-2 pt-2 bg-dark mb-5">
+            <p>عدد السجلات المدخلة من قبل المستخدم</p><hr class="bg-dark">
+            <p style="font-size:1.5rem"> سجل <span class="badge badge-danger">{{recordsCount}}</span></p>
+        </div>
         {% block content %} sss {% endblock %}
     </main>
     <!-- /.container -->
