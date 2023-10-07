@@ -27,6 +27,16 @@ class recordCreatView(LoginRequiredMixin,CreateView):
         context['recordsCount']     = UserAyada.objects.get(pk=userId).count
         return context
 
+    def form_valid(self, form):
+        # You can access the form data using the "form.cleaned_data" dictionary
+        # Example logic code:
+        userId = self.request.user.id
+        UserAyadaa = UserAyada.objects.get(pk=userId)
+        prevCount = UserAyadaa.count
+        count = int(prevCount)+1
+        UserAyadaa = UserAyada.objects.filter(pk=userId).update(count=count)
+        return super().form_valid(form)
+
 ## services Views
 ## to add login required  LoginRequiredMixin
 class ServiceListView(ListView):

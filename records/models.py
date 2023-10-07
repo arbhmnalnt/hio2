@@ -11,7 +11,7 @@ class TimeStampMixin(models.Model):
 class UserAyada(models.Model):
     name    = models.CharField(max_length=50, null=True, blank=True, verbose_name="اسم العيادة")
     user    = models.ForeignKey(User, on_delete=models.CASCADE)
-    count   = models.IntegerField()
+    count   = models.IntegerField(default=0)
 
 class FinalRecord(TimeStampMixin, models.Model):
     user        = models.CharField(max_length=50, null=True, blank=True, verbose_name="اسم المستخدم")
